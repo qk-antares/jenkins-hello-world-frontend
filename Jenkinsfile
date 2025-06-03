@@ -1,18 +1,12 @@
 pipeline {
     agent any
 
+    // 使用Jenkins上的nodejs 18工具
     tools {
         nodejs 'nodejs 18'
     }
 
     stages {
-        stage('Clone') {
-            steps {
-                git branch: 'main',
-                    url: 'git@github.com:qk-antares/jenkins-hello-world-frontend.git'
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'pnpm install'
@@ -34,7 +28,7 @@ pipeline {
                             sshTransfer(
                                 sourceFiles: 'dist/**',
                                 removePrefix: 'dist', // 删除路径前缀，保留 dist 下结构
-                                remoteDirectory: '/software/app', // 远程路径
+                                remoteDirectory: '/software/app/frontend/jenkins-hello-world-frontend', // 远程路径
                                 execCommand: '''
                                     echo "✅ 文件上传完成，开始执行部署任务"
                                 '''
