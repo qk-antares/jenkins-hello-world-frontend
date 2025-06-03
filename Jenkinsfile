@@ -28,7 +28,7 @@ pipeline {
                             sshTransfer(
                                 sourceFiles: 'dist/**',
                                 removePrefix: 'dist', // 删除路径前缀，保留 dist 下结构
-                                remoteDirectory: '/software/app/frontend/jenkins-hello-world-frontend', // 远程路径
+                                remoteDirectory: './frontend/jenkins-hello-world-frontend', // 远程路径
                                 execCommand: '''
                                     echo "✅ 文件上传完成，开始执行部署任务"
                                 '''
